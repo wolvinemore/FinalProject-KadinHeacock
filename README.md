@@ -15,7 +15,7 @@ Using Flask to create a web app that helps with decision making! Simply ask the 
 ### Dependencies
 
 ```
-pip install -r requirements.txt
+py -m pip install -r requirements.txt or pip install -r requirements.txt to get the dependecies
 ```
 
 ### Executing program
