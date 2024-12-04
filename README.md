@@ -40,3 +40,5 @@ Kadin Heacock
 [Professor Zeller]
 
 [Python Packages](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+
+[Flask Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/factory/)
