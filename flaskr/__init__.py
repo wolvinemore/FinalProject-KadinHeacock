@@ -3,12 +3,12 @@ import os
 from flask import Flask
 
 
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+
     app.config.from_mapping(
-        SECRET_KEY='MoreSecretOfAKey',
+        SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
@@ -25,13 +25,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # The Starting page that provides information and links
-    @app.route('/')
-    def start():
-
-    # add it to where it has a header that allows you to go to different web pages
-    # Have it display recently added threat data
-        return 'index'
+    # a simple page that says hello
+    @app.route('/hello')
+    def hello():
+        return 'Hello, World!'
 
     from . import db
     db.init_app(app)
@@ -44,4 +41,3 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
-

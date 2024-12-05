@@ -8,6 +8,7 @@ from flaskr.db import get_db
 
 bp = Blueprint('blog', __name__)
 
+
 @bp.route('/')
 def index():
     db = get_db()
@@ -17,6 +18,33 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
+
+
+@bp.route('/create', methods=('GET', 'POST'))
+@login_required
+def create():
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        error = None
+
+        if not title:
+            error = 'Title is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO post (title, body, author_id)'
+                ' VALUES (?, ?, ?)',
+                (title, body, g.user['id'])
+            )
+            db.commit()
+            return redirect(url_for('blog.index'))
+
+    return render_template('blog/create.html')
+
 
 def get_post(id, check_author=True):
     post = get_db().execute(
@@ -34,30 +62,6 @@ def get_post(id, check_author=True):
 
     return post
 
-@bp.route("/create", methods=("GET", "POST"))
-@login_required
-def create():
-    """Create a new post for the current user."""
-    if request.method == "POST":
-        title = request.form["title"]
-        body = request.form["body"]
-        error = None
-
-        if not title:
-            error = "Title is required."
-
-        if error is not None:
-            flash(error)
-        else:
-            db = get_db()
-            db.execute(
-                "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
-            )
-            db.commit()
-            return redirect(url_for("blog.index"))
-
-    return render_template("blog/create.html")
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
@@ -86,12 +90,12 @@ def update(id):
 
     return render_template('blog/update.html', post=post)
 
-@bp.route("/<int:id>/delete", methods=("POST",))
+
+@bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    """Delete a post. Ensures that the post exists and that the logged in user is the author of the post."""
     get_post(id)
     db = get_db()
-    db.execute("DELETE FROM post WHERE id = ?", (id,))
+    db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for("blog.index"))
+    return redirect(url_for('blog.index'))

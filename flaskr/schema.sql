@@ -17,10 +17,3 @@ CREATE TABLE post (
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
-
-CREATE TABLE threat (
-    id INTEGER PRIMARY KEY AUTOINCERTMENT,
-    threat_name TEXT UNIQUE NOT NULL,
-    ioc TEXT NOT NULL
-
-);
