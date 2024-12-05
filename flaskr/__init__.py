@@ -28,7 +28,10 @@ def create_app(test_config=None):
     # The Starting page that provides information and links
     @app.route('/')
     def start():
-        return 'start'
+
+    # add it to where it has a header that allows you to go to different web pages
+    # Have it display recently added threat data
+        return 'index'
 
     from . import db
     db.init_app(app)
