@@ -19,20 +19,27 @@ def index():
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
-@bp.route('/threat', methods=('GET', 'POST'))
+'''@bp.route('/threat', methods=('GET', 'POST'))
 def threat():
     if request.method == 'POST':
 
-        addr = request.form['IpAddress']
-        hash = request.form['Hash']
+        Field1 = request.form['Field1']
+        Field2 = request.form['Field2']
         db = get_db()
+
+        threat = db.execute(
+            'INSERT INTO threat(username, author_user_id, Field1, Field2, created_at, updated_at) VALUES (username, author_user_id, Field1, Field2, created_at, updated_at)'
+        ).fetchall()
+
         error = None
+
+        print('It kinda worked')
 
 
         flash(error)
 
-    #return redirect(url_for('blog/threat.html'))
-    return render_template('blog/threat.html')
+
+    return render_template('blog/threat.html')'''
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -59,23 +66,6 @@ def create():
             return redirect(url_for('blog.index'))
 
     return render_template('blog/create.html')
-
-
-def get_post(id, check_author=True):
-    post = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = ?',
-        (id,)
-    ).fetchone()
-
-    if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
-
-    if check_author and post['author_id'] != g.user['id']:
-        abort(403)
-
-    return post
 
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
@@ -114,3 +104,23 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
+
+
+def get_post(id, check_author=True):
+    post = get_db().execute(
+        'SELECT p.id, title, body, created, author_id, username'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' WHERE p.id = ?',
+        (id,)
+    ).fetchone()
+
+    if post is None:
+        abort(404, f"Post id {id} doesn't exist.")
+
+    if check_author and post['author_id'] != g.user['id']:
+        abort(403)
+
+    return post
+
+'''def sanatize
+    return '''
