@@ -14,14 +14,19 @@ Using Flask to create a web app that helps with decision making! Simply ask the 
 
 ### Dependencies
 
+Run this command in order to install the dependencies on Mac or Linux 
 ```
-py -m pip install -r requirements.txt or pip install -r requirements.txt to get the dependecies
+pip install -r requirements.txt
+```
+If running windows, then run this command to install the dependencies 
+```
+py -m pip install -r requirements.txt 
 ```
 
 ### Executing program
 
 ```
-flask --app flaskr run --debug to start the server on your local host machine.
+flask --app flaskr run to start the server on your local host machine.
 
 
 ```
