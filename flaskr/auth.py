@@ -68,7 +68,6 @@ def login():
     return render_template('auth/login.html')
 
 
-
 # route and functionality built-in for logging out
 @bp.route('/logout')
 def logout():

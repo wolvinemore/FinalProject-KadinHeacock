@@ -19,6 +19,21 @@ def index():
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
+@bp.route('/threat', methods=('GET', 'POST'))
+def threat():
+    if request.method == 'POST':
+
+        addr = request.form['IpAddress']
+        hash = request.form['Hash']
+        db = get_db()
+        error = None
+
+
+        flash(error)
+
+    #return redirect(url_for('blog/threat.html'))
+    return render_template('blog/threat.html')
+
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
