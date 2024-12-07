@@ -25,19 +25,17 @@ def threat():
 
         Field1 = request.form['Field1']
         Field2 = request.form['Field2']
+
         db = get_db()
 
         threat = db.execute(
-            'INSERT INTO threat(username, author_user_id, Field1, Field2, created_at, updated_at) VALUES (username, author_user_id, Field1, Field2, created_at, updated_at)'
+            f'''INSERT INTO threat (Field1, Field2) VALUES ('{Field1}', '{Field2}')'''
         ).fetchall()
 
+        db.commit()
+
         error = None
-
-        print('It kinda worked')
-
-
         flash(error)
-
 
     return render_template('blog/threat.html')
 
