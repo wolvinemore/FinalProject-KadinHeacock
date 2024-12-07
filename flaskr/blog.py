@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
 from werkzeug.exceptions import abort
 
@@ -25,11 +25,12 @@ def threat():
 
         Field1 = request.form['Field1']
         Field2 = request.form['Field2']
+        g.user['username']
 
         db = get_db()
-
+        # Takes field data inserted into webpage and stores them into threat SQL database to be called on in view_threat_data webpage
         threat = db.execute(
-            f'''INSERT INTO threat (Field1, Field2) VALUES ('{Field1}', '{Field2}')'''
+            f'''INSERT INTO threat (username, author_user_id, Field1, Field2) VALUES ('{g.user['username']}', {g.user['id']}, '{Field1}', '{Field2}')'''
         ).fetchall()
 
         db.commit()

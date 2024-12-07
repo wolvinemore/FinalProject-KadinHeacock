@@ -22,6 +22,8 @@ CREATE TABLE post (
 -- Creates a table that stores IOC's and other threat data along with the user assigned to it.
 CREATE TABLE threat (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  author_user_id INTEGER NOT NULL,
   Field1 TEXT NOT NULL,
   Field2 TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
