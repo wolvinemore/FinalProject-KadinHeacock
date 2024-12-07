@@ -19,7 +19,7 @@ def index():
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
-'''@bp.route('/threat', methods=('GET', 'POST'))
+@bp.route('/threat', methods=('GET', 'POST'))
 def threat():
     if request.method == 'POST':
 
@@ -39,7 +39,7 @@ def threat():
         flash(error)
 
 
-    return render_template('blog/threat.html')'''
+    return render_template('blog/threat.html')
 
 
 @bp.route('/create', methods=('GET', 'POST'))
