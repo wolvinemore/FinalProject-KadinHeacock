@@ -25,15 +25,17 @@ py -m pip install -r requirements.txt
 
 ### Executing program
 
+Run this command to start the server on your local host machine.
 ```
-flask --app flaskr run to start the server on your local host machine.
-
-
+flask --app flaskr 
 ```
 
 ### Output 
 
-This should create 5 graphs in Charts for each of the 5 stocks.
+This should create a website that would allow you to insert indicators of compromise(IOC) data and share it with others.
+As well as share detailed information about the cyber threat you are researching. 
+The website also allows users to register an account and then login with said account.
+
 
 
 ## Author
