@@ -19,7 +19,10 @@ def index():
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
+
+#function used to collect user provided threat data and commitit to the database
 @bp.route('/threat', methods=('GET', 'POST'))
+@login_required # new
 def threat():
     if request.method == 'POST':
 
@@ -41,6 +44,18 @@ def threat():
     return render_template('blog/threat.html')
 
 
+# function used to display user collected threat data from database
+@bp.route('/view_threat', methods=('GET', 'POST'))
+def view_threat():
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        error = None
+
+    return render_template('blog/view_threat.html')
+
+
+# used to create and share what threats you are researching.
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
@@ -121,5 +136,24 @@ def get_post(id, check_author=True):
 
     return post
 
-'''def sanatize
-    return '''
+#future implementation - a function found in (insert source) used to sanatize text put in fields to prevent SQL injections.
+'''
+def sanitize_string(value):
+    # Remove all tags and attributes:
+    value = re.sub(r"<[^>]+>", "", value, flags=re.IGNORECASE)
+
+    if self.sanitize_quotes:
+        # Escape quotes:
+        value = value.replace("'", "''").replace('"', '""')
+
+    # Escape custom characters
+    for char in self.custom_characters:
+        value = value.replace(char, "\\" + char)
+
+    # Remove suspicious keywords and patterns (RCE):
+    value = re.sub(
+        r"exec|eval|system|import|open|os\.", "", value, flags=re.IGNORECASE
+    )
+
+    return value
+'''
