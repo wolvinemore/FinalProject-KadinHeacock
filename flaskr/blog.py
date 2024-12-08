@@ -9,6 +9,7 @@ from flaskr.db import get_db
 bp = Blueprint('blog', __name__)
 
 
+#function for root webpage
 @bp.route('/')
 def index():
     db = get_db()
@@ -82,6 +83,7 @@ def create():
     return render_template('blog/create.html')
 
 
+#function used to update the user that's logged in's blog post.
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
@@ -110,6 +112,7 @@ def update(id):
     return render_template('blog/update.html', post=post)
 
 
+#function that's called when delete button is selected and user wants to delete blog post.
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
@@ -120,6 +123,7 @@ def delete(id):
     return redirect(url_for('blog.index'))
 
 
+#function that's called when post webpage is or is not found.
 def get_post(id, check_author=True):
     post = get_db().execute(
         'SELECT p.id, title, body, created, author_id, username'

@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form with 10 Text Fields</title>
+{% extends 'base.html' %}
 
-</head>
-<body>
-    <h1>Threat Intel Data</h1>
-    <form method="POST" action="/threat">
-        <table>
+{% block header %}
+  <h1>{% block title %}Threat Intel{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="/threat" class="clean-form">
+        <table class="clean-table">
             <tr>
                 <th>Field1</th>
                 <th>Field2</th>
@@ -21,5 +18,4 @@
         </table>
         <button type="submit" class="submit-btn">Submit</button>
     </form>
-</body>
-</html>
+{% endblock %}

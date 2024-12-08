@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>"hello world"</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Threat Data{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+      <p>"hello"</p>
+  </form>
+{% endblock %}
