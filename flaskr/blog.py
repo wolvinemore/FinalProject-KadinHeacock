@@ -27,14 +27,18 @@ def index():
 def threat():
     if request.method == 'POST':
 
+        title = request.form['title']
         Field1 = request.form['Field1']
         Field2 = request.form['Field2']
+        Field3 = request.form['Field3']
+        Field4 = request.form['Field4']
+        description = request.form['description']
         g.user['username']
 
         db = get_db()
         # Takes field data inserted into webpage and stores them into threat SQL database to be called on in view_threat_data webpage
         threat = db.execute(
-            f'''INSERT INTO threat (username, author_user_id, Field1, Field2) VALUES ('{g.user['username']}', {g.user['id']}, '{Field1}', '{Field2}')'''
+            f'''INSERT INTO threat (title, username, author_user_id, Field1, Field2, Field3, Field4, description) VALUES ('{title}','{g.user['username']}', {g.user['id']}, '{Field1}', '{Field2}', '{Field3}', '{Field4}', '{description}')'''
         ).fetchall()
 
         db.commit()

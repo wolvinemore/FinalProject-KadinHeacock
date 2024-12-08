@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<!--Header-->
   <h1>{% block title %}Threat Intel{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
+
+<p>Add malicious Indicators of Compromise (IOC's) to our database to help assist cybersecurity operations.</p>
+    <!--Form-->
     <form method="POST" action="/threat" class="clean-form">
+        <!--Title-->
+        <h3>Title of Threat</h3>
+        <p><input type="text" name="title" id="title" required></p>
+        <p>Add the name of the malicious activity collected here</p>
+
+        <!--Fields-->
         <table class="clean-table">
             <tr>
                 <th>Field1</th>
                 <th>Field2</th>
+                <th>Field3</th>
+                <th>Field4</th>
             </tr>
             <tr>
                 <td><input type="text" name="Field1" id="Field1" required></td>
                 <td><input type="text" name="Field2" id="Field2" required></td>
+                <td><input type="text" name="Field3" id="Field3" ></td>
+                <td><input type="text" name="Field4" id="Field4" ></td>
             </tr>
         </table>
+
+        <!--Description Box-->
+        <textarea name="description" id="description">{{ request.form['body'] }}</textarea>
         <button type="submit" class="submit-btn">Submit</button>
     </form>
 {% endblock %}

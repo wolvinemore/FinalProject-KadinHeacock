@@ -4,8 +4,23 @@
   <h1>{% block title %}Threat Data{% endblock %}</h1>
 {% endblock %}
 
+
 {% block content %}
-  <form method="post">
-      <p>"hello"</p>
-  </form>
+  {% for threat in threat %}
+    <article class="clean-form">
+      <header>
+        <div>
+          <h1>{{ threat['title'] }}</h1>
+          <div class="about">by {{ threat['username'] }} on {{ threat['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+        {% if g.user['id'] == post['author_id'] %}
+          <a class="action" href="{{ url_for('blog.update_threat', id=post['id']) }}">Edit</a>
+        {% endif %}
+      </header>
+      <p class="body">{{ threat['body'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
 {% endblock %}
