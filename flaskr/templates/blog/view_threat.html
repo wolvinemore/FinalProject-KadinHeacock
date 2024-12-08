@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Threat Data{% endblock %}</h1>
+  <h1>{% block title %}Threat Database{% endblock %}</h1>
 {% endblock %}
 
 
 {% block content %}
-  {% for threat in threat %}
+  {% for threat in threats %}
     <article class="clean-form">
       <header>
         <div>
           <h1>{{ threat['title'] }}</h1>
           <div class="about">by {{ threat['username'] }} on {{ threat['created'].strftime('%Y-%m-%d') }}</div>
         </div>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('blog.update_threat', id=post['id']) }}">Edit</a>
+        {% if g.user['id'] == threat['author_id'] %}
+          <a class="action" href="{{ url_for('blog.update_threat', id=threat['id']) }}">Edit</a>
         {% endif %}
       </header>
       <p class="body">{{ threat['body'] }}</p>
