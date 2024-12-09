@@ -41,6 +41,7 @@ def threat():
             f'''INSERT INTO threat (title, username, author_user_id, Field1, Field2, Field3, Field4, description) VALUES ('{title}','{g.user['username']}', {g.user['id']}, '{Field1}', '{Field2}', '{Field3}', '{Field4}', '{description}')'''
         ).fetchall()
 
+        print(threat)
         db.commit()
 
         error = None
@@ -55,6 +56,8 @@ def view_threat():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
+
+        db = get_db()
         error = None
 
     return render_template('blog/view_threat.html')
@@ -156,7 +159,7 @@ def sanitize_string(value):
 
     # Escape custom characters
     for char in self.custom_characters:
-        value = value.replace(char, "\\" + char)
+        value = value.replace(char, "\/\/'" + char)
 
     # Remove suspicious keywords and patterns (RCE):
     value = re.sub(

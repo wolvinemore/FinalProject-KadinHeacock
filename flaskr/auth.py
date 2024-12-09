@@ -96,3 +96,18 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+#route for function to call admin page
+@bp.route('/admin', methods=('GET', 'POST'))
+def admin():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+        flash(error)
+
+    return render_template('auth/admin.html')
