@@ -8,21 +8,22 @@
     {% if g.user.id == 6 %}
       <li><a href="{{ url_for('blog.index') }}">Home</a>
       <li><a href="{{ url_for('auth.admin') }}">admin</a>
+      <li><a href="{{ url_for('blog.Decision_Maker') }}">Decision-Maker</a>
       <li><a href="{{ url_for('blog.view_threat') }}">Threat-Database</a>
-      <li><a href="{{ url_for('blog.threat') }}">Threat Intel</a>
+      <li><a href="{{ url_for('blog.threat') }}">Threat-Intel</a>
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
 
     {% elif g.user %}
       <li><a href="{{ url_for('blog.index') }}">Home</a>
-      <li><a href="{{ url_for('blog.view_threat') }}">Threat Database</a>
-      <li><a href="{{ url_for('blog.threat') }}">Threat Intel</a>
+      <li><a href="{{ url_for('blog.view_threat') }}">Threat-Database</a>
+      <li><a href="{{ url_for('blog.threat') }}">Threat-Intel</a>
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
 
     {% else %}
       <li><a href="{{ url_for('blog.index') }}">Home</a>
-      <li><a href="{{ url_for('blog.view_threat') }}">Threat Database</a>
+      <li><a href="{{ url_for('blog.view_threat') }}">Threat-Database</a>
       <li><a href="{{ url_for('auth.register') }}">Register</a>
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}

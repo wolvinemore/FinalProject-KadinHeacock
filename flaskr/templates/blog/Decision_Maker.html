@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Decision Maker{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <p><br><br></p>
+  <h3>Having a hard time with something? I can help, what would you like to ask?</h3>
+  <p><input type="text" name="question" id="question" required></p>
+  <p><br></p>
+  <p>Answer: {{ results }}</p>
+{% endblock %}

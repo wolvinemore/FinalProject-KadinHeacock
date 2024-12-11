@@ -2,6 +2,9 @@
 
 {% block header %}
   <h1>{% block title %}Threat Database{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('blog.threat') }}">New Threat</a>
+  {% endif %}
 {% endblock %}
 
 

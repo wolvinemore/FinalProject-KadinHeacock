@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
+import random
+
 bp = Blueprint('blog', __name__)
 
 
@@ -62,6 +64,28 @@ def view_threat():
 
     return render_template('blog/view_threat.html')
 
+@bp.route('/Decision_Maker', methods=('GET', 'POST'))
+def Decision_Maker():
+    if request.method == 'POST':
+        question = request.form['question']
+
+        Answer = ["Yes", "I Mean, give it a try", "Just put in more threat data dude", "No", "Delete schema.sql", "ERROR 404", "ask again later", "Have you tried harder?"]
+
+
+        result = random.choice(Answer)
+        print(result)
+
+        results = result
+
+        db = get_db()
+        db.execute(
+            'INSERT INTO answer (results)'
+        )
+
+        db.commit()
+
+        error = None
+    return render_template('blog/Decision_Maker.html')
 
 # used to create and share what threats you are researching.
 @bp.route('/create', methods=('GET', 'POST'))

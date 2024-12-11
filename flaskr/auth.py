@@ -96,18 +96,42 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+
 #route for function to call admin page
 @bp.route('/admin', methods=('GET', 'POST'))
 def admin():
     if request.method == 'POST':
+
         username = request.form['username']
         password = request.form['password']
+
         db = get_db()
         error = None
-        user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
-        ).fetchone()
+
 
         flash(error)
 
     return render_template('auth/admin.html')
+
+'''
+# Route to edit a post
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit_post(id):
+    post = BlogPost.query.get_or_404(id)
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.content = request.form['content']
+        db.session.commit()
+        flash('Post updated successfully!', 'success')
+        return redirect(url_for('auth.admin'))
+    return render_template('edit_post.html')
+    
+# Route to delete a post
+@app.route('/delete/<int:id>', methods=['GET'])
+def delete_post(id):
+    post = BlogPost.query.get_or_404(id)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Post deleted successfully!', 'danger')
+    return redirect(url_for('admin'))
+'''
