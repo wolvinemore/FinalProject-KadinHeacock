@@ -274,4 +274,3 @@ def api(id):
                 'updated_at': api[10]}
 
     return jsonify(json_data)
-
