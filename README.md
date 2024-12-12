@@ -39,9 +39,10 @@ Run these commands to start the server on your local host machine.
 Navigate to http://127.0.0.1:5000/auth/register to register you account and then click the login link to log into your account.
 
 Navigate to *http://127.0.0.1:5000/source* in order to launch the software
-
+```
 To run this server live for public usage, run this command and ensure this is the output:
 
+```
 pip install waitress or py - m pip install waitress
 
 *waitress-serve --call 'flaskr:create_app'*
