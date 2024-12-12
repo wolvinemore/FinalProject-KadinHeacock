@@ -25,10 +25,30 @@ py -m pip install -r requirements.txt
 
 ### Executing program
 
-Run this command to start the server on your local host machine.
+Run these commands to start the server on your local host machine.
+
 ```
-flask --app flaskr 
+Navigate to http://127.0.0.1:5000/auth/register to register you account and then click the login link to log into your account.
+
+Navigate to *http://127.0.0.1:5000/source* in order to launch the software
+
+To run this server live for public usage, run this command and ensure this is the output:
+
+*waitress-serve --call 'flaskr:create_app'*
+
+Serving on http://0.0.0.0:8080
 ```
+
+Set up the SQL database:
+
+```
+This can be set up any way you prefer. However I prefer setting it up by creatin a folder main and creating tables.
+
+```
+
+### How to use
+
+After the page is initially set up and the database is set up. Get to doing some threat research and collect some data!
 
 ### Output 
 
