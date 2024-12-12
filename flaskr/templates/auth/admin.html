@@ -15,7 +15,7 @@
     </table>
 
     {% for post in posts %}
-    <form method="post" action="/admin/update/{{ post.id }}">
+    <form method="post">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}" required>

@@ -105,7 +105,6 @@ def load_logged_in_user():
 #route for function to call admin page
 @bp.route('/admin', methods=('GET', 'POST'))
 def admin():
-    post = get_post(id)
 
     if request.method == 'POST':
         title = request.form['title']
