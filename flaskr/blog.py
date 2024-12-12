@@ -52,9 +52,6 @@ def threat():
     return render_template('blog/threat.html')
 
 
-
-
-
 # function used to display user collected threat data from database
 @bp.route('/view_threat', methods=('GET', 'POST'))
 def view_threat():
@@ -69,6 +66,26 @@ def view_threat():
 
 
     return render_template('blog/view_threat.html', threats=threats)
+
+
+
+# function used to display user collected threat data from database
+@bp.route('/edit_threat', methods=('GET', 'POST'))
+@login_required
+def edit_threat():
+
+    db = get_db()
+
+    threats = db.execute(
+        'SELECT id, title, username, author_user_id, Field1, Field2, Field3, Field4, description, created_at, updated_at'
+        ' FROM threat'
+        ' ORDER BY updated_at DESC'
+    ).fetchall()
+
+
+    return render_template('blog/edit_threat.html', threats=threats)
+
+
 
 
 
@@ -98,6 +115,7 @@ def Decision_Maker():
         error = None
     return render_template('blog/Decision_Maker.html')
 
+
 # used to create and share what threats you are researching.
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -123,6 +141,7 @@ def create():
             return redirect(url_for('blog.index'))
 
     return render_template('blog/create.html')
+
 
 
 #function used to update the user that's logged in's blog post.
@@ -154,6 +173,7 @@ def update(id):
     return render_template('blog/update.html', post=post)
 
 
+
 #function that's called when delete button is selected and user wants to delete blog post.
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
@@ -163,6 +183,7 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
+
 
 
 #function that's called when post webpage is or is not found.
@@ -181,6 +202,8 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
+
 
 #future implementation - a function found in (insert source) used to sanatize text put in fields to prevent SQL injections.
 '''

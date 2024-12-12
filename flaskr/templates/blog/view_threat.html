@@ -17,7 +17,7 @@
           <div class="about">by {{ threat['username'] }} on {{ threat['updated_at'].strftime('%Y-%m-%d') }}</div>
         </div>
         {% if g.user['id'] == threat['author_user_id'] %}
-          <a class="action" href="{{ url_for('blog.update', id=threat['id']) }}">Edit</a>
+          <a class="action" href="{{ url_for('blog.edit_threat', id=threat['id']) }}">Edit</a>
         {% endif %}
 
 

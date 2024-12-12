@@ -7,7 +7,12 @@
 {% block content %}
   <p><br><br></p>
   <h3>Having a hard time with something? I can help, what would you like to ask?</h3>
-  <p><input type="text" name="question" id="question" required></p>
+
+  <!--Question Box-->
+  <textarea name="question" id="question">{{ request.form['body'] }}</textarea>
+  <br>
+  <button type="submit" class="submit-btn">Submit</button>
+
   <p><br></p>
   <p>Answer: {{ results }}</p>
 {% endblock %}
