@@ -9,6 +9,7 @@
       <li><a href="{{ url_for('blog.index') }}">Home</a>
       <li><a href="{{ url_for('auth.admin') }}">admin</a>
       <li><a href="{{ url_for('blog.Decision_Maker') }}">Decision-Maker</a>
+      <li><a href="{{ url_for('blog.index') }}">AbuseIP</a>
       <li><a href="{{ url_for('blog.view_threat') }}">Threat-Database</a>
       <li><a href="{{ url_for('blog.threat') }}">Threat-Intel</a>
       <li><span>{{ g.user['username'] }}</span>
@@ -16,6 +17,7 @@
 
     {% elif g.user %}
       <li><a href="{{ url_for('blog.index') }}">Home</a>
+      <li><a href="{{ url_for('blog.index') }}">AbuseIP</a>
       <li><a href="{{ url_for('blog.view_threat') }}">Threat-Database</a>
       <li><a href="{{ url_for('blog.threat') }}">Threat-Intel</a>
       <li><span>{{ g.user['username'] }}</span>

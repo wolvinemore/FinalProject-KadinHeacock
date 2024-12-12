@@ -71,3 +71,5 @@ Kadin Heacock
 [Python Packages](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
 [Flask Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/factory/)
+
+[Flask API](https://pythonbasics.org/flask-rest-api/)

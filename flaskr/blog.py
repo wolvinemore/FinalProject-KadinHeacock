@@ -1,6 +1,6 @@
 #imports
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, session
+    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify, session
 )
 from werkzeug.exceptions import abort
 
@@ -8,6 +8,7 @@ from flaskr.auth import login_required
 from flaskr.db import get_db
 
 import random
+
 
 bp = Blueprint('blog', __name__)
 
@@ -249,25 +250,28 @@ def get_post(id, check_author=True):
     return post
 
 
+#API
+@bp.route('/api/<int:id>', methods=['GET'])
+def api(id):
 
-#future implementation - a function found in (insert source) used to sanatize text put in fields to prevent SQL injections.
-'''
-def sanitize_string(value):
-    # Remove all tags and attributes:
-    value = re.sub(r"<[^>]+>", "", value, flags=re.IGNORECASE)
+    db = get_db()
+    api = db.execute(
+        'SELECT * FROM threat '
+        f' WHERE id = {id}'
+    ).fetchone()
+    db.commit()
 
-    if self.sanitize_quotes:
-        # Escape quotes:
-        value = value.replace("'", "''").replace('"', '""')
+    json_data={'id': api[0],
+               'title': api[1],
+               'username': api[2],
+               'author_user_id': api[3],
+                'Field1': api[4],
+                'Field2': api[5],
+                'Field3': api[6],
+                'Field4': api[7],
+                'description': api[8],
+                'created_at': api[9],
+                'updated_at': api[10]}
 
-    # Escape custom characters
-    for char in self.custom_characters:
-        value = value.replace(char, "\/\/'" + char)
+    return jsonify(json_data)
 
-    # Remove suspicious keywords and patterns (RCE):
-    value = re.sub(
-        r"exec|eval|system|import|open|os\.", "", value, flags=re.IGNORECASE
-    )
-
-    return value
-'''
