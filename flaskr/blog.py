@@ -54,6 +54,7 @@ def threat():
 
 
 
+
 # function used to display user collected threat data from database
 @bp.route('/view_threat', methods=('GET', 'POST'))
 def view_threat():
@@ -61,13 +62,14 @@ def view_threat():
     db = get_db()
 
     threats = db.execute(
-        'SELECT p.id, title, username, author_user_id, Field1, Field2, Field3, Field4, description'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' ORDER BY created DESC'
+        'SELECT id, title, username, author_user_id, Field1, Field2, Field3, Field4, description, created_at, updated_at'
+        ' FROM threat'
+        ' ORDER BY updated_at DESC'
     ).fetchall()
 
 
     return render_template('blog/view_threat.html', threats=threats)
+
 
 
 

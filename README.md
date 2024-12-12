@@ -36,6 +36,8 @@ This should create a website that would allow you to insert indicators of compro
 As well as share detailed information about the cyber threat you are researching. 
 The website also allows users to register an account and then login with said account.
 
+Checkout and register at this link so you can view your API usage for AbuseIPDB
+https://www.abuseipdb.com/account/api
 
 
 ## Author
