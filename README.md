@@ -28,7 +28,13 @@ py -m pip install -r requirements.txt
 
 Set up the SQL database:
 
+Use this command to initialize your SQL server
+
 ```
+flask --app flaskr init-db   ---Linux or Mac 
+
+py -m flask --app flaskr init-db   ---Windows
+
 This can be set up any way you prefer. However I prefer setting it up by creatin a folder main and creating tables.
 
 ```
