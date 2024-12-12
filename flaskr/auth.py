@@ -156,6 +156,7 @@ def admin():
 #    db.commit()
 #    return redirect(url_for('auth.admin'))
 
+
 #function that's called when post webpage is or is not found.
 def get_post(id, check_author=True):
     post = get_db().execute(
