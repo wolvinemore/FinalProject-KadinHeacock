@@ -25,6 +25,14 @@ py -m pip install -r requirements.txt
 
 ### Executing program
 
+
+Set up the SQL database:
+
+```
+This can be set up any way you prefer. However I prefer setting it up by creatin a folder main and creating tables.
+
+```
+
 Run these commands to start the server on your local host machine.
 
 ```
@@ -34,16 +42,11 @@ Navigate to *http://127.0.0.1:5000/source* in order to launch the software
 
 To run this server live for public usage, run this command and ensure this is the output:
 
+pip install waitress or py - m pip install waitress
+
 *waitress-serve --call 'flaskr:create_app'*
 
 Serving on http://0.0.0.0:8080
-```
-
-Set up the SQL database:
-
-```
-This can be set up any way you prefer. However I prefer setting it up by creatin a folder main and creating tables.
-
 ```
 
 ### How to use
@@ -73,3 +76,5 @@ Kadin Heacock
 [Flask Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/factory/)
 
 [Flask API](https://pythonbasics.org/flask-rest-api/)
+
+[error handling](https://stackoverflow.com/questions/22633227/sqlite-ambiguous-column-name)
