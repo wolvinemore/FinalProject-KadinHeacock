@@ -1,9 +1,12 @@
 #imports
 import functools
 
+from flask import abort
+
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
+from pandas.io.sql import execute
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
@@ -102,38 +105,72 @@ def load_logged_in_user():
 #route for function to call admin page
 @bp.route('/admin', methods=('GET', 'POST'))
 def admin():
-    if request.method == 'POST':
+    post = get_post(id)
 
-        username = request.form['username']
-        password = request.form['password']
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+
+
 
         db = get_db()
-        error = None
-
-
-        flash(error)
-
-    return render_template('auth/admin.html')
-
-'''
-# Route to edit a post
-@app.route('/edit/<int:id>', methods=['GET', 'POST'])
-def edit_post(id):
-    post = BlogPost.query.get_or_404(id)
-    if request.method == 'POST':
-        post.title = request.form['title']
-        post.content = request.form['content']
-        db.session.commit()
-        flash('Post updated successfully!', 'success')
+        db.execute(
+            'UPDATE post SET title = ?, body = ?'
+            ' WHERE id = ?',
+            (title, content, id)
+        )
+        db.commit()
         return redirect(url_for('auth.admin'))
-    return render_template('edit_post.html')
-    
-# Route to delete a post
-@app.route('/delete/<int:id>', methods=['GET'])
-def delete_post(id):
-    post = BlogPost.query.get_or_404(id)
-    db.session.delete(post)
-    db.session.commit()
-    flash('Post deleted successfully!', 'danger')
-    return redirect(url_for('admin'))
+
+    db = get_db()
+    error = None
+
+
+    flash(error)
+    threat = db.execute(
+        'SELECT id, title, username, author_user_id, Field1, Field2, Field3, Field4, description, created_at, updated_at'
+        ' FROM threat'
+        ' ORDER BY updated_at DESC'
+
+    ).fetchall()
+
+    post = db.execute(
+        'SELECT id, title, body, created, author_id'
+        ' FROM post'
+
+    ).fetchall()
+
+    threats=threat
+    posts=post
+
+    return render_template('auth/admin.html', threats=threats, posts=posts)
+
+
 '''
+#function that's called when delete button is selected and user wants to delete blog post.
+@bp.route('/<int:id>/delete', methods=('POST'))
+@login_required
+def delete(id):
+    get_post(id)
+    db = get_db()
+    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.commit()
+    return redirect(url_for('auth.admin'))
+'''
+
+#function that's called when post webpage is or is not found.
+def get_post(id, check_author=True):
+    post = get_db().execute(
+        'SELECT p.id, title, body, created, author_id, username'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' WHERE p.id = ?',
+        (id,)
+    ).fetchone()
+
+    if post is None:
+        abort(404, f"Post id {id} doesn't exist.")
+
+    if check_author and post['author_id'] != g.user['id']:
+        abort(403)
+
+    return post

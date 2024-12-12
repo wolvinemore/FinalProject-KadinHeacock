@@ -12,9 +12,10 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+    </table>
 
     {% for post in posts %}
-    <form method="POST">
+    <form method="post" action="/admin/update/{{ post.id }}">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}" required>
@@ -28,14 +29,14 @@
     {% endfor %}
 
     {% for threat in threats %}
-    <form method="POST">
+    <form method="post">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ threat.title }}" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ threat.title }}" required>
             </div>
             <div class="form-group">
-                <label for="content">Content</label>
-                <textarea class="form-control" id="content" name="content" rows="5">{{ threat.content }}</textarea>
+                <label for="description">Content</label>
+                <textarea class="form-control" id="description" name="description" rows="5">{{ threat.content }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
