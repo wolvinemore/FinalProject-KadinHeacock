@@ -1,3 +1,4 @@
+#imports
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
@@ -43,7 +44,6 @@ def threat():
             f'''INSERT INTO threat (title, username, author_user_id, Field1, Field2, Field3, Field4, description) VALUES ('{title}','{g.user['username']}', {g.user['id']}, '{Field1}', '{Field2}', '{Field3}', '{Field4}', '{description}')'''
         ).fetchall()
 
-        print(threat)
         db.commit()
 
         error = None
@@ -52,19 +52,28 @@ def threat():
     return render_template('blog/threat.html')
 
 
+
+
 # function used to display user collected threat data from database
 @bp.route('/view_threat', methods=('GET', 'POST'))
 def view_threat():
-    if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
 
-        db = get_db()
-        error = None
+    db = get_db()
 
-    return render_template('blog/view_threat.html')
+    threats = db.execute(
+        'SELECT p.id, title, username, author_user_id, Field1, Field2, Field3, Field4, description'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' ORDER BY created DESC'
+    ).fetchall()
 
+
+    return render_template('blog/view_threat.html', threats=threats)
+
+
+
+# route and functionality for Decision-Maker webpage
 @bp.route('/Decision_Maker', methods=('GET', 'POST'))
+@login_required
 def Decision_Maker():
     if request.method == 'POST':
         question = request.form['question']

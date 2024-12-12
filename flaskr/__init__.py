@@ -1,8 +1,13 @@
+### INF601 - Advanced Programming in Python
+### Kadin Heacock
+### FinalProject
+
+#imports
 import os
 
 from flask import Flask
 
-
+# Function that initially creates the app
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -24,11 +29,6 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
 
     from . import db
     db.init_app(app)

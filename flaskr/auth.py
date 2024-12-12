@@ -1,3 +1,4 @@
+#imports
 import functools
 
 from flask import (
@@ -10,6 +11,7 @@ from flaskr.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
+#Route and functionality for the register page
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -84,7 +86,7 @@ def login_required(view):
 
     return wrapped_view
 
-
+# functionality for loading the user information for the webpage
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
