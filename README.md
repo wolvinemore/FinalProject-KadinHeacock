@@ -12,6 +12,8 @@ Using Flask to create a web app that helps with decision making! Simply ask the 
 
 ## Getting Started
 
+Make sure you are good at what you do and what you do is master CHATGPT
+
 ### Dependencies
 
 Run this command in order to install the dependencies on Mac or Linux 
